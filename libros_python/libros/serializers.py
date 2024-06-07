@@ -22,18 +22,20 @@ class UserDetailSerializer(serializers.ModelSerializer):
 #-----------------------------------------------------------------------#
 
 class BookSerializer(serializers.ModelSerializer):
+    port = serializers.ImageField(use_url=True)
     class Meta:
         model = models.Book
-        fields = ['id','title', 'author', 'genders', 'language', 'publisher', 'date_publishir']
+        fields = ['id','title', 'author', 'genders', 'language', 'publisher', 'date_publishir', 'port']
 
     def __init__(self, *args, **kwargs):
         super(BookSerializer, self).__init__(*args, **kwargs)
         self.Meta.depth = 1
 
 class BookDetailSerializer(serializers.ModelSerializer):
+    port = serializers.ImageField(use_url=True)
     class Meta:
         model = models.Book
-        fields = ['id','title', 'author', 'genders', 'language', 'publisher']
+        fields = ['id','title', 'author', 'genders', 'language', 'publisher', 'date_publishir', 'port']
 
     def __init__(self, *args, **kwargs):
         super(BookDetailSerializer, self).__init__(*args, **kwargs)
@@ -49,7 +51,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Genders
-        fields = ['id', 'gender']
+        fields = ['id', 'gender', 'image']
 
 class LanngugeSerializer(serializers.ModelSerializer):
     class Meta:

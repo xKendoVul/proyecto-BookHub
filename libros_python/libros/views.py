@@ -17,24 +17,18 @@ class BookList(generics.ListCreateAPIView):
     pagination_class = pagination.PageNumberPagination
 
 class BookDetailList(generics.RetrieveUpdateDestroyAPIView):
-    #queryset = models.Book.objects.all()
+    queryset = models.Book.objects.all()
     serializer_class = serializers.BookDetailSerializer
-
-    def get_queryset(self):
-        book_id = self.kwargs['pk']
-        book = models.Book.objects.get(id=book_id)
-        book_result = models.Book.objects.filter(book=book)
-        return book_result
 
 class AuthorSerializerList(generics.ListAPIView):
     queryset = models.Author.objects.all()
     serializer_class = serializers.AuthorSerializer
 
-class AuthorViewSet(viewsets.ModelViewSet):
+class AuthorViewSet(viewsets.ModelViewSet): 
     queryset = models.Author.objects.all()
     serializer_class = serializers.AuthorSerializer
     
-class  GenreSerializerList(generics.ListAPIView):
+class  GenreSerializerList(generics.ListCreateAPIView):
     queryset = models.Genders.objects.all()
     serializer_class = serializers.GenreSerializer
 
@@ -49,5 +43,7 @@ class PublisherSerializerList(generics.ListAPIView):
 class CommentSerializer(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Comment.objects.all
     serializer_class = serializers.CommentSerializer
+
+
 
 

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class Author(models.Model):
     author_name = models.CharField(max_length=100)
+    pic = models.ImageField(upload_to='author_images/', null=True, blank=True)
 
     def __str__(self):
          return self.author_name
@@ -12,6 +13,7 @@ class Author(models.Model):
 
 class Genders(models.Model):
     gender = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='genres_images/', null=True, blank=True)
 
     def __str__(self):
         return self.gender
@@ -41,10 +43,11 @@ class Book(models.Model):
     language = models.ManyToManyField(Language)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     date_publishir = models.DateField(blank=True)
+    port = models.ImageField(upload_to='book_images/', null=True, blank=True)
 
     def __str__(self):
         return self.title
-    
+
 #-----------------------------------------------------------------------#
 
 class User(models.Model):

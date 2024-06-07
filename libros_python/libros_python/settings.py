@@ -1,5 +1,6 @@
 from pathlib import Path
 from .db import POSTGRESQL
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,8 +15,11 @@ SECRET_KEY = 'django-insecure-dyo^1#yeq%*yf^pe5^l9z&g^dekt+s=puwpxoye!o_*9@c1^&o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000"
+]
 
 # Application definition
 
@@ -28,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'corsheaders',
     'libros'
 ]
 
@@ -39,6 +44,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'libros_python.urls'
@@ -107,13 +114,16 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
     #'DEFAULT_AUTHENTICATION_CLASSES': [ 
     #    'rest_framework_simplejwt.authentication.JWTAuthentication',
     #]
-    'DEFAULT_PAGINATION_CLASS': 'libros.pagination.CustomPagination',
-    'PAGE_SIZE': 1
+    # 'DEFAULT_PAGINATION_CLASS': 'libros.pagination.CustomPagination',
+    # 'PAGE_SIZE': 1
 }
